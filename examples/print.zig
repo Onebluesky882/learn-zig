@@ -23,9 +23,7 @@ pub fn printString(input: []const u8) void {
 // !  Wrapper สำหรับพิมพ์ข้อความธรรมดา ที่รู้อยู่แล้วว่า จะใส่อะไรก่อน comptime
 // * มักเป็น การ log print status ข้อดีคือไว
 // pub fn info(comptime fmt: []const u8, args: anytype) void {
-
 //     std.debug.print("[INFO] " ++ fmt, args);
-
 // }
 
 // ! Runtime String

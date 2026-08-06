@@ -3,6 +3,8 @@ const hello = @import("hello-world.zig");
 const print = @import("print.zig");
 const addNumber = @import("fn/add.zig");
 const transform = @import("fn/transform.zig");
+const slice = @import("data-type/slice.zig");
+const array = @import("data-type/array.zig");
 
 pub fn main() !void {
     const add = addNumber.add(45, 45);
@@ -19,4 +21,11 @@ pub fn main() !void {
     hello.hello() catch |err| {
         std.debug.print("error :{}\n", .{err});
     };
+
+    const sliceDemo: []const u8 = "string literal here";
+    slice.sliceDemo(sliceDemo);
+
+    const slice_array: []i32 = array.getSlice();
+    slice_array[1] = 8;
+    std.debug.print("{s} {any}\n", .{ "array[0] : ", slice_array });
 }
