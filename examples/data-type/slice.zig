@@ -2,6 +2,13 @@ const std = @import("std");
 
 // pointer and a length
 
+//   fn getPointer (slice: []const i32) มี const กับ ไม่มีต่างกันอย่างไร
+
+// []const i32
+// fn getPointer(slice: []const i32) void {
+//   แก้ไขไม่ได้ slice[0] = 10; ❌
+// }
+
 pub fn sliceDemo(slice: []const u8) void {
     const slice_length = slice.len;
     std.debug.print("{s} '{s}'\n", .{ "slice :", slice });

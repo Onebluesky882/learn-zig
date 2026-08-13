@@ -45,7 +45,7 @@ pub const User = struct {
 // * แต่ ณ เวลาเดียวกันใช้เพียงแบบเดียว และต้องการประหยัด memory
 // ! union(enum) ≈ switch case ที่แต่ละ case สามารถมีข้อมูลของตัวเองติดมาด้วย
 
-const Result = union(enum) {
+pub const Result = union(enum) {
     success: []const u8,
     not_success: []const u8,
 };

@@ -7,7 +7,9 @@ const slice = @import("data-type/slice.zig");
 const array = @import("data-type/array.zig");
 const pointer = @import("data-type/pointer.zig");
 const User = @import("data-type/struct.zig");
-const union_example = @import("data-type/struct.zig").union_example;
+const unionFn = @import("data-type/struct.zig").unionFn;
+const loop = @import("data-type/for_loop.zig");
+const errorHandle = @import("data-type/error_handle.zig");
 
 fn debugPrint(comptime string: []const u8, arg: anytype) void {
     std.debug.print(string, arg);
@@ -58,5 +60,17 @@ pub fn main() !void {
     user.print();
 
     // union
-    debugPrint("union : {} \n", .{union_example.medium_value});
+    unionFn();
+
+    // for loop
+    loop.forLoop();
+
+    loop.whileLoop();
+
+    loop.openPages();
+
+    // error_handle
+    errorHandle.errorHandle() catch |err| {
+        debugPrint("\t {} \n", .{err});
+    };
 }
