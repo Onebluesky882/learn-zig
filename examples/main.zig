@@ -1,6 +1,5 @@
 const std = @import("std");
 const hello = @import("hello-world.zig");
-const print = @import("print.zig");
 const addNumber = @import("fn/add.zig");
 const transform = @import("fn/transform.zig");
 const slice = @import("data-type/slice.zig");
@@ -10,6 +9,10 @@ const User = @import("data-type/struct.zig");
 const unionFn = @import("data-type/struct.zig").unionFn;
 const loop = @import("data-type/for_loop.zig");
 const errorHandle = @import("data-type/error_handle.zig");
+const getPointer = @import("data-type/allocators.zig");
+const getPointerTwo = @import("data-type/create_allocate.zig");
+const Allocator = std.mem.Allocator;
+const print = std.debug.print;
 
 fn debugPrint(comptime string: []const u8, arg: anytype) void {
     std.debug.print(string, arg);
@@ -24,7 +27,6 @@ pub fn main() !void {
     const result = try transform.itoa(1234, &buffer);
     std.debug.print("{s} {s}\n", .{ "convert to number", result });
 
-    print.printString("hello");
     try hello.hello();
 
     hello.hello() catch |err| {
@@ -73,4 +75,24 @@ pub fn main() !void {
     errorHandle.errorHandle() catch |err| {
         debugPrint("\t {} \n", .{err});
     };
+
+    // allocators
+
+    // pointer complie time const
+    const number: *const i32 = getPointer.getPointer();
+
+    debugPrint("number :{} {}\n", .{ number, number.* });
+
+    const arrayPointer = [_]i32{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    for (0..10) |i| {
+        const value: i32 = arrayPointer[i];
+        debugPrint("value at {} : {} \n ", .{ i, value });
+    }
+    debugPrint("number : {} {} \n ", .{ number, number.* });
+
+    // allocate global variable
+    const page_allocator = std.heap.page_allocator;
+    const globalVariable = try getPointerTwo.getPointer(page_allocator);
+    defer page_allocator.free(globalVariable);
+    print(" global variable:{} {}\n", .{ globalVariable, globalVariable.* });
 }

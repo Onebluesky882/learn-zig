@@ -1,11 +1,16 @@
 const std = @import("std");
-const forLoop = @import("for_loop.zig");
 
-//* ถ้า function สามารถ return error → ต้องประกาศ !T
+// ถ้า function สามารถ return error → ต้องประกาศ !T
 // fn anotherFunction() !i32 {
 //     const result = try findStudent();
 //     return result;
 // }
+
+//* errors
+pub fn handleError() void {
+    const b: i32 = 0;
+    std.debug.assert(b != 0);
+}
 
 const VALID_ADDRESS: [3][]const u8 = .{ "www.example.com", "www.google.com", "www.bbc.com" };
 const HttpStatus = error{ Ok, BadRequest, Unauthorized, PaymentRequired, Forbidden, NotFound, MethodNotAllowed, NotAcceptable, RequestTimeout, InternalServerError };
